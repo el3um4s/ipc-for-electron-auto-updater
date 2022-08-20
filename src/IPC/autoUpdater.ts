@@ -74,16 +74,16 @@ function initAutoUpdater(mainWindow: BrowserWindow) {
     mainWindow.webContents.send("updateAvailable", info);
   });
 
+  AU.on("update-not-available", (info: UpdateInfo) => {
+    mainWindow.webContents.send("updateNotAvailable", info);
+  });
+
   AU.on("download-progress", (info: ProgressInfo) => {
     mainWindow.webContents.send("downloadProgress", info);
   });
 
   AU.on("update-downloaded", (info: UpdateDownloadedEvent) => {
     mainWindow.webContents.send("updateDownloaded", info);
-  });
-
-  AU.on("update-not-available", (info: UpdateInfo) => {
-    mainWindow.webContents.send("updateNotAvailable", info);
   });
 }
 
