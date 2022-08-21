@@ -142,12 +142,12 @@ const requestVersionNumber = async (options: {
   const apiKey = options?.apiKey || defaultApiKey;
   const api = globalThis[apiKey as keyof typeof globalThis][nameAPI];
 
-  api.send("requestSystemInfo", null);
+  api.send("requestVersionNumber", null);
 
   return getVersionNumber({ callback, apiKey });
 };
 
-const checkForUpdate = async (options: {
+const checkForUpdates = async (options: {
   callback?: (arg0: UpdateInfo) => void;
   apiKey?: string;
 }): Promise<UpdateInfo> => {
@@ -155,7 +155,7 @@ const checkForUpdate = async (options: {
   const apiKey = options?.apiKey || defaultApiKey;
   const api = globalThis[apiKey as keyof typeof globalThis][nameAPI];
 
-  api.send("checkForUpdate", null);
+  api.send("checkForUpdates", null);
   return updateAvailable({ callback, apiKey });
 };
 
@@ -177,7 +177,7 @@ const quitAndInstall = async (options: { apiKey?: string }): Promise<void> => {
 
 const renderer = {
   requestVersionNumber,
-  checkForUpdate,
+  checkForUpdates,
   startDownloadUpdate,
   quitAndInstall,
   on: {

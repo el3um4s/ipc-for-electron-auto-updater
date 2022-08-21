@@ -15,7 +15,7 @@ const nameAPI: NameAPI = "autoUpdater";
 // to Main
 const validSendChannel: SendChannels = {
   requestVersionNumber: requestVersionNumber,
-  checkForUpdate: checkForUpdate,
+  checkForUpdates: checkForUpdates,
   startDownloadUpdate: startDownloadUpdate,
   quitAndInstall: quitAndInstall,
 };
@@ -40,8 +40,8 @@ class UpdaterInfo extends IPC {
   requestVersionNumber(mainWindow: BrowserWindow) {
     requestVersionNumber(mainWindow);
   }
-  checkForUpdate() {
-    checkForUpdate();
+  checkForUpdates() {
+    checkForUpdates();
   }
   startDownloadUpdate() {
     startDownloadUpdate();
@@ -97,7 +97,7 @@ function requestVersionNumber(
   mainWindow.webContents.send("getVersionNumber", result);
 }
 
-function checkForUpdate(
+function checkForUpdates(
   mainWindow?: BrowserWindow,
   event?: Electron.IpcMainEvent,
   message?: unknown

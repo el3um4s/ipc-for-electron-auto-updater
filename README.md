@@ -30,14 +30,14 @@ In main electron file (`index.ts`):
 ```ts
 import autoUpdater from "@el3um4s/ipc-for-electron-auto-updater";
 
-updaterInfo.initAutoUpdater(mainWindow);
-updaterInfo.checkForUpdate();
+autoUpdater.initAutoUpdater(mainWindow);
+autoUpdater.checkForUpdates();
 
 // to start donwloading the update
-updaterInfo.startDownloadUpdate();
+autoUpdater.startDownloadUpdate();
 
 // to restart the electron app and install the new version
-updaterInfo.quitAndInstall();
+autoUpdater.quitAndInstall();
 ```
 
 In the renderer file:
@@ -54,7 +54,7 @@ autoUpdater.requestVersionNumber({
   },
 });
 
-autoUpdater.checkForUpdate({
+autoUpdater.checkForUpdates({
   apiKey: "my-api-key",
   callback: (data) => {
     const { version, releaseName, releaseDate } = data;
@@ -100,7 +100,7 @@ globalThis.api.systemInfo.receive("getVersionNumber", (data) => {
 ### API: Electron Side
 
 - `requestVersionNumber` - Request the version number. The response is sent to the `getVersionNumber` channel
-- `checkForUpdate` - Check if an update is available. The response is sent to the `updateAvailable` channel (or via the `updateNotAvailable` channel if no update is available)
+- `checkForUpdates` - Check if an update is available. The response is sent to the `updateAvailable` channel (or via the `updateNotAvailable` channel if no update is available)
 - `startDownloadUpdate` - Request to start downloading the update. The response is sent to the `downloadProgress` channel
 - `quitAndInstall` - Request to quit and install the update. The response is sent to the `updateDownloaded` channel
 
@@ -125,14 +125,14 @@ autoUpdater.requestVersionNumber({
 });
 ```
 
-`checkForUpdate = async (options: { callback?: (arg0: UpdateInfo) => void; apiKey?: string; }): Promise<UpdateInfo>`
+`checkForUpdates = async (options: { callback?: (arg0: UpdateInfo) => void; apiKey?: string; }): Promise<UpdateInfo>`
 
 example:
 
 ```ts
 import autoUpdater from "@el3um4s/renderer-for-electron-auto-updater";
 
-autoUpdater.checkForUpdate({
+autoUpdater.checkForUpdates({
   callback: (data) => {
     const { version, releaseName, releaseDate } = data;
     console.log("Update available", version, releaseName, releaseDate);
@@ -195,7 +195,7 @@ example:
 ```ts
 import autoUpdater from "@el3um4s/renderer-for-electron-auto-updater";
 
-autoUpdater.checkForUpdate();
+autoUpdater.checkForUpdates();
 
 systemInfo.on.errorOnAutoUpdate({
   callback: (data) => {
@@ -212,7 +212,7 @@ example:
 ```ts
 import autoUpdater from "@el3um4s/renderer-for-electron-auto-updater";
 
-autoUpdater.checkForUpdate();
+autoUpdater.checkForUpdates();
 
 systemInfo.on.updateAvailable({
   callback: (data) => {
@@ -230,7 +230,7 @@ example:
 ```ts
 import autoUpdater from "@el3um4s/renderer-for-electron-auto-updater";
 
-autoUpdater.checkForUpdate();
+autoUpdater.checkForUpdates();
 
 systemInfo.on.updateNotAvailable({
   callback: (data) => {
@@ -246,7 +246,7 @@ example:
 ```ts
 import autoUpdater from "@el3um4s/renderer-for-electron-auto-updater";
 
-autoUpdater.checkForUpdate();
+autoUpdater.checkForUpdates();
 
 autoUpdater.on.downloadProgress({
   callback: (data) => {
@@ -270,7 +270,7 @@ example:
 ```ts
 import autoUpdater from "@el3um4s/renderer-for-electron-auto-updater";
 
-autoUpdater.checkForUpdate();
+autoUpdater.checkForUpdates();
 
 autoUpdater.on.updateDownloaded({
   callback: (data) => {
