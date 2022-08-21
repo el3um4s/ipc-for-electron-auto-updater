@@ -62,6 +62,24 @@ const errorOnAutoUpdate = async (options: {
   });
 };
 
+const checkingForUpdate = async (options: {
+  callback?: () => void;
+  apiKey?: string;
+}): Promise<void> => {
+  const { callback } = options;
+  const apiKey = options?.apiKey || defaultApiKey;
+  const api = globalThis[apiKey as keyof typeof globalThis][nameAPI];
+
+  return new Promise((resolve) => {
+    api.receive("checkingForUpdate", () => {
+      if (callback) {
+        callback();
+      }
+      resolve();
+    });
+  });
+};
+
 const updateAvailable = async (options: {
   callback?: (arg0: UpdateInfo) => void;
   apiKey?: string;
@@ -182,6 +200,7 @@ const renderer = {
   quitAndInstall,
   on: {
     getVersionNumber,
+    checkingForUpdate,
     errorOnAutoUpdate,
     updateAvailable,
     updateNotAvailable,

@@ -92,7 +92,7 @@ In the renderer you can use:
 let version: string;
 
 globalThis.api.autoUpdater.send("requestVersionNumber", null);
-globalThis.api.systemInfo.receive("getVersionNumber", (data) => {
+globalThis.api.autoUpdater.receive("getVersionNumber", (data) => {
   version = data.version;
 });
 ```
@@ -197,10 +197,26 @@ import autoUpdater from "@el3um4s/renderer-for-electron-auto-updater";
 
 autoUpdater.checkForUpdates();
 
-systemInfo.on.errorOnAutoUpdate({
+autoUpdater.on.errorOnAutoUpdate({
   callback: (data) => {
     console.log("Error on auto update");
     console.log(data);
+  },
+});
+```
+
+`on.checkingForUpdate = async (options: { callback?: () => void; apiKey?: string; }): Promise<void>`
+
+example:
+
+```ts
+import autoUpdater from "@el3um4s/renderer-for-electron-auto-updater";
+
+autoUpdater.checkForUpdates();
+
+autoUpdater.on.checkingForUpdate({
+  callback: () => {
+    console.log("Checking for update...");
   },
 });
 ```
@@ -214,7 +230,7 @@ import autoUpdater from "@el3um4s/renderer-for-electron-auto-updater";
 
 autoUpdater.checkForUpdates();
 
-systemInfo.on.updateAvailable({
+autoUpdater.on.updateAvailable({
   callback: (data) => {
     const { version, releaseName, releaseDate } = data;
     console.log("Update available", version, releaseName, releaseDate);
@@ -232,7 +248,7 @@ import autoUpdater from "@el3um4s/renderer-for-electron-auto-updater";
 
 autoUpdater.checkForUpdates();
 
-systemInfo.on.updateNotAvailable({
+autoUpdater.on.updateNotAvailable({
   callback: (data) => {
     console.log("Update not available", data);
   },
