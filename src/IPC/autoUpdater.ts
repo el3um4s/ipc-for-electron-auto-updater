@@ -28,9 +28,9 @@ const validReceiveChannel: string[] = [
   "updateNotAvailable",
   "downloadProgress",
   "updateDownloaded",
+  "errorOnAutoUpdate",
   "autoUpdateAvailable",
   "autoUpdateDownloaded",
-  "errorOnAutoUpdate",
 ];
 
 class UpdaterInfo extends IPC {
