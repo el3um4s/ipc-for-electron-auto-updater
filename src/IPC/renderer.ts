@@ -25,11 +25,11 @@ interface UpdateDownloadedEvent extends UpdateInfo {
   downloadedFile: string;
 }
 
-const getVersionNumber = async (options: {
+const getVersionNumber = async (options?: {
   callback?: (arg0: VersionNumber) => void;
   apiKey?: string;
 }): Promise<VersionNumber> => {
-  const { callback } = options;
+  const callback = options?.callback;
   const apiKey = options?.apiKey || defaultApiKey;
   const api = globalThis[apiKey as keyof typeof globalThis][nameAPI];
 
@@ -44,11 +44,11 @@ const getVersionNumber = async (options: {
   });
 };
 
-const errorOnAutoUpdate = async (options: {
+const errorOnAutoUpdate = async (options?: {
   callback?: (arg0: Error) => void;
   apiKey?: string;
 }): Promise<Error> => {
-  const { callback } = options;
+  const callback = options?.callback;
   const apiKey = options?.apiKey || defaultApiKey;
   const api = globalThis[apiKey as keyof typeof globalThis][nameAPI];
 
@@ -62,11 +62,11 @@ const errorOnAutoUpdate = async (options: {
   });
 };
 
-const checkingForUpdate = async (options: {
+const checkingForUpdate = async (options?: {
   callback?: () => void;
   apiKey?: string;
 }): Promise<void> => {
-  const { callback } = options;
+  const callback = options?.callback;
   const apiKey = options?.apiKey || defaultApiKey;
   const api = globalThis[apiKey as keyof typeof globalThis][nameAPI];
 
@@ -80,11 +80,11 @@ const checkingForUpdate = async (options: {
   });
 };
 
-const updateAvailable = async (options: {
+const updateAvailable = async (options?: {
   callback?: (arg0: UpdateInfo) => void;
   apiKey?: string;
 }): Promise<UpdateInfo> => {
-  const { callback } = options;
+  const callback = options?.callback;
   const apiKey = options?.apiKey || defaultApiKey;
   const api = globalThis[apiKey as keyof typeof globalThis][nameAPI];
 
@@ -98,11 +98,11 @@ const updateAvailable = async (options: {
   });
 };
 
-const updateNotAvailable = async (options: {
+const updateNotAvailable = async (options?: {
   callback?: (arg0: UpdateInfo) => void;
   apiKey?: string;
 }): Promise<UpdateInfo> => {
-  const { callback } = options;
+  const callback = options?.callback;
   const apiKey = options?.apiKey || defaultApiKey;
   const api = globalThis[apiKey as keyof typeof globalThis][nameAPI];
 
@@ -116,11 +116,11 @@ const updateNotAvailable = async (options: {
   });
 };
 
-const downloadProgress = async (options: {
+const downloadProgress = async (options?: {
   callback?: (arg0: ProgressInfo) => void;
   apiKey?: string;
 }): Promise<ProgressInfo> => {
-  const { callback } = options;
+  const callback = options?.callback;
   const apiKey = options?.apiKey || defaultApiKey;
   const api = globalThis[apiKey as keyof typeof globalThis][nameAPI];
 
@@ -134,11 +134,11 @@ const downloadProgress = async (options: {
   });
 };
 
-const updateDownloaded = async (options: {
+const updateDownloaded = async (options?: {
   callback?: (arg0: UpdateDownloadedEvent) => void;
   apiKey?: string;
 }): Promise<UpdateDownloadedEvent> => {
-  const { callback } = options;
+  const callback = options?.callback;
   const apiKey = options?.apiKey || defaultApiKey;
   const api = globalThis[apiKey as keyof typeof globalThis][nameAPI];
 
@@ -152,11 +152,11 @@ const updateDownloaded = async (options: {
   });
 };
 
-const requestVersionNumber = async (options: {
+const requestVersionNumber = async (options?: {
   callback?: (arg0: VersionNumber) => void;
   apiKey?: string;
 }): Promise<VersionNumber> => {
-  const { callback } = options;
+  const callback = options?.callback;
   const apiKey = options?.apiKey || defaultApiKey;
   const api = globalThis[apiKey as keyof typeof globalThis][nameAPI];
 
@@ -165,11 +165,11 @@ const requestVersionNumber = async (options: {
   return getVersionNumber({ callback, apiKey });
 };
 
-const checkForUpdates = async (options: {
+const checkForUpdates = async (options?: {
   callback?: (arg0: UpdateInfo) => void;
   apiKey?: string;
 }): Promise<UpdateInfo> => {
-  const { callback } = options;
+  const callback = options?.callback;
   const apiKey = options?.apiKey || defaultApiKey;
   const api = globalThis[apiKey as keyof typeof globalThis][nameAPI];
 
@@ -177,7 +177,7 @@ const checkForUpdates = async (options: {
   return updateAvailable({ callback, apiKey });
 };
 
-const startDownloadUpdate = async (options: {
+const startDownloadUpdate = async (options?: {
   apiKey?: string;
 }): Promise<void> => {
   const apiKey = options?.apiKey || defaultApiKey;
@@ -186,7 +186,7 @@ const startDownloadUpdate = async (options: {
   api.send("startDownloadUpdate", null);
 };
 
-const quitAndInstall = async (options: { apiKey?: string }): Promise<void> => {
+const quitAndInstall = async (options?: { apiKey?: string }): Promise<void> => {
   const apiKey = options?.apiKey || defaultApiKey;
   const api = globalThis[apiKey as keyof typeof globalThis][nameAPI];
 
